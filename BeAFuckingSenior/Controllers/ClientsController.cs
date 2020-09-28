@@ -49,10 +49,11 @@ namespace BeAFuckingSenior.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ClientName,ClientSurname,Nationality,CreateAt")] Client client)
+        public ActionResult Create([Bind(Include = "Id,ClientName,ClientSurname,Nationality,Email")] Client client)
         {
             if (ModelState.IsValid)
             {
+                client.CreateAt = DateTime.Now;
                 db.Clients.Add(client);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -81,7 +82,7 @@ namespace BeAFuckingSenior.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ClientName,ClientSurname,Nationality,CreateAt")] Client client)
+        public ActionResult Edit([Bind(Include = "Id,ClientName,ClientSurname,Nationality")] Client client)
         {
             if (ModelState.IsValid)
             {
